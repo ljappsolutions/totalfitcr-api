@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import { getCompanies } from './companies/handler';
 import { getRoutineTemplates } from './routine-templates/handler';
 import { getExercises } from './exercises/handler';
-import { postUser, getUsers } from './users/handler';
+import { postUser, getUsers, putUser } from './users/handler';
 
 if (process.env.IS_OFFLINE) {
   var credentials = new AWS.SharedIniFileCredentials({
@@ -18,4 +18,5 @@ export {
   getExercises,
   postUser,
   getUsers,
+  putUser,
 };

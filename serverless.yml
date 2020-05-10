@@ -55,6 +55,12 @@ functions:
       - http:
           method: post
           path: user
+  putuser:
+    handler: handler.putUser
+    events:
+      - http:
+          method: put
+          path: user
   user:
     handler: handler.getUsers
     events:

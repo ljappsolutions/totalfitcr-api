@@ -56,3 +56,19 @@ export const postUser: APIGatewayProxyHandler = async (event) => {
     responseConfirm
   });
 }
+
+export const putUser: APIGatewayProxyHandler = async (event, context) => {
+  const cognito = new AWS.CognitoIdentityServiceProvider();
+  const params = {
+    UserAttributes: [
+      {
+        Name: 'custom:id',
+        Value: '207400129'
+      },
+    ],
+    UserPoolId: 'us-east-1_k6ka2yoSi',
+    Username: 'Google_114902170525708826846',
+  };
+  const response = await cognito.adminUpdateUserAttributes(params).promise();
+  return getSuccessResponse(response);
+}

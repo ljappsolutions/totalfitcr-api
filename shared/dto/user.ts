@@ -6,8 +6,10 @@ export class UserDto {
   firstName: string;
   lastName: string;
   identification: string;
+  userName: string;
 
   public fromCognito = (user: UserType) => {
+    this.userName = user.Username;
     this.email = user.Attributes.find(y => y.Name === 'email').Value;
     this.firstName = user.Attributes.find(y => y.Name === 'name').Value;
     this.lastName = user.Attributes.find(y => y.Name === 'family_name').Value;
