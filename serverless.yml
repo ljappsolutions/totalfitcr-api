@@ -1,0 +1,63 @@
+service:
+  name: totalfitcr-api
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  stage: ${opt:stage, self:provider.stage}
+  environment:
+    IS_OFFLINE:
+        dev: 'true'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: ljapp-amplify
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    IS_OFFLINE: ${self:custom.environment.IS_OFFLINE.${self:custom.stage}}
+    
+functions:
+  company:
+    handler: handler.getCompanies
+    events:
+      - http:
+          method: get
+          path: company
+  routineTemplate:
+    handler: handler.getRoutineTemplates
+    events:
+      - http:
+          method: get
+          path: routine-template
+  exercise:
+    handler: handler.getExercises
+    events:
+      - http:
+          method: get
+          path: exercise
+  postuser:
+    handler: handler.postUser
+    events:
+      - http:
+          method: post
+          path: user
+  user:
+    handler: handler.getUsers
+    events:
+      - http:
+          method: get
+          path: user
