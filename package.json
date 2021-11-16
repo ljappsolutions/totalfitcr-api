@@ -9,7 +9,7 @@
     "offline": "sls offline"
   },
   "dependencies": {
-    "aws-sdk": "^2.673.0",
+    "aws-sdk": "^2.814.0",
     "loglevel": "^1.6.8",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
